@@ -64,20 +64,19 @@ def print_results(results_dic, results_stats_dic, model,
     """
     print('\n\nThere are {} images, {} of those is dog images, other images not.'.format(results_stats_dic['n_images'], results_stats_dic['n_dogs_img']))
     print('Using {} model to classify images'.format(model))
-    print('The accuracy of classifying breed of dog on dog images is {:.1f}%'.format(results_stats_dic['pct_correct_breed']))
     print('The accuracy of classifying dog on all images is {:.1f}%'.format(results_stats_dic['pct_correct_dogs']))
-    print('The accuracy of classifying not a dog on all images is {:.1f}%'.format(results_stats_dic['pct_correct_notdogs']))
-
     if print_incorrect_dogs:
         print('\n\tlist incorrect classifying on the dog images belows:')
         print('\tFile name\t\tpet image label\t\tclassifier label')
         for filename, result_lst in results_dic.items():
             if result_lst[3] and not result_lst[4]:
                 print('\t{:<25}{:<16}{:<30}'.format(filename, result_lst[0], result_lst[1]))
+    print('The accuracy of classifying breed of dog on dog images is {:.1f}%'.format(results_stats_dic['pct_correct_breed']))
     if print_incorrect_breed:
         print('\n\tlist incorrect classifying dog breed on the dog images belows:')
         print('\tFile name\t\tpet image label\t\tclassifier label')
         for filename, result_lst in results_dic.items():
             # print(result_lst)
-            if result_lst[0] not in result_lst[1]:
+            if result_lst[0] not in result_lst[1] and result_lst[3]:
                 print('\t{:<25}{:<18}{:<25}'.format(filename, result_lst[0], result_lst[1]))
+    # print('The accuracy of classifying not a dog on all images is {:.1f}%'.format(results_stats_dic['pct_correct_notdogs']))

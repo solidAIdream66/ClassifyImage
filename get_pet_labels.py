@@ -43,7 +43,7 @@ def get_pet_labels(image_dir):
     results_dic = {}
 
     # Retrieve the filenames from folder pet_images/
-    filename_list = listdir("pet_images/")
+    filename_list = listdir(image_dir)
     for filename in filename_list:
         word_list_filename = filename.lower().split('_')
         if filename not in results_dic:

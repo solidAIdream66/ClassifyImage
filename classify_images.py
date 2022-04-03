@@ -72,14 +72,6 @@ def classify_images(images_dir, results_dic, model):
         image_classification = image_classification.lower().strip()
         results_value = results_dic[filename]
         # add classifer label to value list index 1
-        classifier_label_index = 1
-        classifier_match_index = 2
-        if len(results_value) < classifier_label_index + 1:
-            results_value.append(image_classification)
-        else:
-            results_value[classifier_label_index] = image_classification
+        results_value.append(image_classification)
         # add if match to value list index 2
-        if len(results_value) < classifier_match_index + 1:
-            results_value.append(results_dic[filename][0] in image_classification)
-        else:
-            results_value[classifier_match_index] = results_value[0] in image_classification
+        results_value.append(results_value[0] in image_classification)

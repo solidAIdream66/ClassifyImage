@@ -71,10 +71,9 @@ def adjust_results4_isadog(results_dic, dogfile):
     pets_dict = {}
     with open(dogfile) as f:
         for line in f:
-            for dog_breed in line.split():
+            for dog_breed in line.split(','):
                 dog_breed = dog_breed.lower().strip()
                 pets_dict[dog_breed] = 1
-
-    for filename, results_value in results_dic.items():
-        results_value.append(results_value[0] in pets_dict)
-        results_value.append(results_value[1] in pets_dict)
+    for filename, result_lst in results_dic.items():
+        result_lst.append(result_lst[0] in pets_dict)
+        result_lst.append(any([label.lower().strip() in pets_dict for label in result_lst[1].split(',')]))
